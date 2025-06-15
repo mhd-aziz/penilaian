@@ -1,10 +1,27 @@
-import React from 'react';
+import React from "react";
+import { Navbar, Container, Button } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
-const Header = ({ onLogout }) => (
-  <header className="app-header">
-    <h1>Aplikasi Penilaian Siswa "SMA NEGERI 91"</h1>
-    <button onClick={onLogout}>Logout</button>
-  </header>
-);
+const Header = ({ onLogout }) => {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    onLogout();
+    navigate("/login");
+  };
+
+  return (
+    <Navbar bg="dark" variant="dark" expand="lg" className="shadow-sm">
+      <Container fluid>
+        <Navbar.Brand href="/dashboard" style={{ fontWeight: "bold" }}>
+          Aplikasi Penilaian
+        </Navbar.Brand>
+        <Button variant="outline-light" onClick={handleLogout}>
+          Logout
+        </Button>
+      </Container>
+    </Navbar>
+  );
+};
 
 export default Header;

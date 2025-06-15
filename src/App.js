@@ -1,6 +1,8 @@
+// src/App.js
+
 import React, { useState, useEffect } from "react";
 import {
-  BrowserRouter as Router,
+  // HAPUS 'BrowserRouter as Router' dari sini
   Routes,
   Route,
   Navigate,
@@ -34,35 +36,32 @@ function App() {
   };
 
   return (
-    <Router>
-      <div className="app-container">
-        {isLoggedIn ? (
-          <>
-            <Header onLogout={handleLogout} />
-            <div className="main-layout">
-              <Sidebar />
-              <main className="main-content">
-                <Routes>
-                  <Route path="/" element={<Navigate to="/dashboard" />} />
-                  <Route path="/dashboard" element={<Dashboard />} />
-                  <Route path="/siswa" element={<SiswaPage />} />
-                  <Route path="/guru" element={<GuruPage />} />
-                  <Route path="*" element={<Navigate to="/dashboard" />} />
-                </Routes>
-              </main>
-            </div>
-          </>
-        ) : (
-          <Routes>
-            <Route
-              path="/login"
-              element={<LoginPage onLogin={handleLogin} />}
-            />
-            <Route path="*" element={<Navigate to="/login" />} />
-          </Routes>
-        )}
-      </div>
-    </Router>
+    // HAPUS <Router> DARI SINI
+    <div className="app-container">
+      {isLoggedIn ? (
+        <>
+          <Header onLogout={handleLogout} />
+          <div className="main-layout">
+            <Sidebar />
+            <main className="main-content">
+              <Routes>
+                <Route path="/" element={<Navigate to="/dashboard" />} />
+                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/siswa" element={<SiswaPage />} />
+                <Route path="/guru" element={<GuruPage />} />
+                <Route path="*" element={<Navigate to="/dashboard" />} />
+              </Routes>
+            </main>
+          </div>
+        </>
+      ) : (
+        <Routes>
+          <Route path="/login" element={<LoginPage onLogin={handleLogin} />} />
+          <Route path="*" element={<Navigate to="/login" />} />
+        </Routes>
+      )}
+    </div>
+    // HAPUS </Router> DARI SINI
   );
 }
 

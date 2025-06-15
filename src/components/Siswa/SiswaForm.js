@@ -1,16 +1,18 @@
+// src/components/Siswa/SiswaForm.js
 import React, { useState } from "react";
+import { Form, Button, Card, Row, Col } from "react-bootstrap";
 
 const SiswaForm = ({ onSubmit, isLoading }) => {
   const [formData, setFormData] = useState({
     nis: "",
-    nm_siswa: "",
+    nama_siswa: "",
     tmp_lahir: "",
     tgl_lahir: "",
-    jkel: "L", 
+    jkel: "L",
     alamat: "",
     telp: "",
-    nm_wali: "",
-    kd_kelas: "", 
+    nama_wali: "",
+    kd_kelas: "X-A",
     username: "",
     password: "",
   });
@@ -26,84 +28,139 @@ const SiswaForm = ({ onSubmit, isLoading }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="data-form">
-      <h3>Input Data Siswa</h3>
-      <input
-        name="nis"
-        value={formData.nis}
-        onChange={handleChange}
-        placeholder="NIS"
-        required
-      />
-      <input
-        name="nm_siswa"
-        value={formData.nm_siswa}
-        onChange={handleChange}
-        placeholder="Nama Siswa"
-        required
-      />
-      <input
-        name="username"
-        value={formData.username}
-        onChange={handleChange}
-        placeholder="Username"
-        required
-      />
-      <input
-        name="password"
-        type="password"
-        value={formData.password}
-        onChange={handleChange}
-        placeholder="Password"
-        required
-      />
-      <input
-        name="tmp_lahir"
-        value={formData.tmp_lahir}
-        onChange={handleChange}
-        placeholder="Tempat Lahir"
-      />
-      <input
-        name="tgl_lahir"
-        type="date"
-        value={formData.tgl_lahir}
-        onChange={handleChange}
-        placeholder="Tanggal Lahir"
-      />
-      <select name="jkel" value={formData.jkel} onChange={handleChange}>
-        <option value="L">Laki-laki</option>
-        <option value="P">Perempuan</option>
-      </select>
-      <input
-        name="alamat"
-        value={formData.alamat}
-        onChange={handleChange}
-        placeholder="Alamat"
-      />
-      <input
-        name="telp"
-        value={formData.telp}
-        onChange={handleChange}
-        placeholder="Telepon"
-      />
-      <input
-        name="nm_wali"
-        value={formData.nm_wali}
-        onChange={handleChange}
-        placeholder="Nama Wali"
-      />
-      <input
-        name="kd_kelas"
-        value={formData.kd_kelas}
-        onChange={handleChange}
-        placeholder="Kode Kelas"
-        required
-      />
+    <Card className="mb-4">
+      <Card.Body>
+        <Card.Title>Form Input Siswa</Card.Title>
+        <Form onSubmit={handleSubmit}>
+          <Row>
+            <Col md={6}>
+              <Form.Group className="mb-3">
+                <Form.Label>NIS</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="nis"
+                  value={formData.nis}
+                  onChange={handleChange}
+                  required
+                />
+              </Form.Group>
+            </Col>
+            <Col md={6}>
+              <Form.Group className="mb-3">
+                <Form.Label>Nama Siswa</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="nama_siswa"
+                  value={formData.nama_siswa}
+                  onChange={handleChange}
+                  required
+                />
+              </Form.Group>
+            </Col>
+          </Row>
+          <Row>
+            <Col md={6}>
+              <Form.Group className="mb-3">
+                <Form.Label>Tempat Lahir</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="tmp_lahir"
+                  value={formData.tmp_lahir}
+                  onChange={handleChange}
+                />
+              </Form.Group>
+            </Col>
+            <Col md={6}>
+              <Form.Group className="mb-3">
+                <Form.Label>Tanggal Lahir</Form.Label>
+                <Form.Control
+                  type="date"
+                  name="tgl_lahir"
+                  value={formData.tgl_lahir}
+                  onChange={handleChange}
+                />
+              </Form.Group>
+            </Col>
+          </Row>
+          <Row>
+            <Col md={6}>
+              <Form.Group className="mb-3">
+                <Form.Label>Jenis Kelamin</Form.Label>
+                <Form.Select
+                  name="jkel"
+                  value={formData.jkel}
+                  onChange={handleChange}
+                >
+                  <option value="L">Laki-laki</option>
+                  <option value="P">Perempuan</option>
+                </Form.Select>
+              </Form.Group>
+            </Col>
+            <Col md={6}>
+              <Form.Group className="mb-3">
+                <Form.Label>Telepon</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="telp"
+                  value={formData.telp}
+                  onChange={handleChange}
+                />
+              </Form.Group>
+            </Col>
+          </Row>
+          <Form.Group className="mb-3">
+            <Form.Label>Alamat</Form.Label>
+            <Form.Control
+              as="textarea"
+              rows={2}
+              name="alamat"
+              value={formData.alamat}
+              onChange={handleChange}
+            />
+          </Form.Group>
+          <Form.Group className="mb-3">
+            <Form.Label>Nama Wali</Form.Label>
+            <Form.Control
+              type="text"
+              name="nama_wali"
+              value={formData.nama_wali}
+              onChange={handleChange}
+            />
+          </Form.Group>
+          <hr />
+          <Row>
+            <Col md={6}>
+              <Form.Group className="mb-3">
+                <Form.Label>Username</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="username"
+                  value={formData.username}
+                  onChange={handleChange}
+                  required
+                />
+              </Form.Group>
+            </Col>
+            <Col md={6}>
+              <Form.Group className="mb-3">
+                <Form.Label>Password</Form.Label>
+                <Form.Control
+                  type="password"
+                  name="password"
+                  value={formData.password}
+                  onChange={handleChange}
+                  required
+                />
+              </Form.Group>
+            </Col>
+          </Row>
 
-      <button type="submit" disabled={isLoading}>
-        {isLoading ? "Menyimpan..." : "Simpan"}
-      </button>
-    </form>
+          <Button type="submit" disabled={isLoading}>
+            {isLoading ? "Menyimpan..." : "Simpan Data"}
+          </Button>
+        </Form>
+      </Card.Body>
+    </Card>
   );
 };
 
