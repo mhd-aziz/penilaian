@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -10,22 +7,19 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// Model berdasarkan tabel SISWA dari PDF
 model SISWA {
-  nis       String    @id @db.VarChar(255) 
+  nis       String    @id @db.VarChar(255)
   nm_siswa  String
   tmp_lahir String?
   tgl_lahir DateTime? @db.Date
-  jkel      String?   @db.VarChar(1) 
+  jkel      String?   @db.VarChar(1)
   alamat    String?
   telp      String?
   nm_wali   String?
   username  String    @unique
   password  String
-  
   kd_kelas  String
   kelas     KELAS     @relation(fields: [kd_kelas], references: [kd_kelas])
-
   absen     ABSEN[]
   nilai     NILAI[]
 }
@@ -38,41 +32,41 @@ model GURU {
   kel_guru       String?   @db.VarChar(1)
   alamat         String?
   telp           String?
-  
   kd_matpel      String
   matpel         MATPEL    @relation(fields: [kd_matpel], references: [kd_matpel])
+  nilai          NILAI[]
+  kelas          KELAS[]
 }
 
 model KELAS {
-  kd_kelas    String  @id @db.VarChar(255)
-  nm_kelas    String
-  jml_siswa   Int?
-  thn_ajaran  String?
-  
-  siswa       SISWA[]
+  kd_kelas   String  @id @db.VarChar(255)
+  nm_kelas   String
+  jml_siswa  Int?
+  thn_ajaran String?
+  nip        String?
+  guru       GURU?   @relation(fields: [nip], references: [nip])
+  siswa      SISWA[]
 }
 
 model MATPEL {
-  kd_matpel  String @id @db.VarChar(255)
-  nm_matpel  String
-  
-  guru       GURU[]
-
-  nilai      NILAI[]
+  kd_matpel String  @id @db.VarChar(255)
+  nm_matpel String
+  guru      GURU[]
+  nilai     NILAI[]
 }
 
 model NILAI {
-  kd_nilai      String  @id @db.VarChar(255)
-  uts_sem_ganjil Int?
-  uas_sem_ganjil Int?
-  uts_sem_genap  Int?
-  uas_sem_genap  Int?
-
-  nis           String
-  siswa         SISWA  @relation(fields: [nis], references: [nis])
-
-  kd_matpel     String
-  matpel        MATPEL @relation(fields: [kd_matpel], references: [kd_matpel])
+  kd_nilai       String  @id @db.VarChar(255)
+  uts_sem_ganjil Float?
+  uas_sem_ganjil Float?
+  uts_sem_genap  Float?
+  uas_sem_genap  Float?
+  nis            String
+  siswa          SISWA   @relation(fields: [nis], references: [nis])
+  kd_matpel      String
+  matpel         MATPEL  @relation(fields: [kd_matpel], references: [kd_matpel])
+  nip            String
+  guru           GURU    @relation(fields: [nip], references: [nip])
 }
 
 model ABSEN {
@@ -82,13 +76,12 @@ model ABSEN {
   alfa      Int?
   izin      Int?
   sakit     Int?
-
   nis       String
-  siswa     SISWA  @relation(fields: [nis], references: [nis])
+  siswa     SISWA   @relation(fields: [nis], references: [nis])
 }
 
 model ADMIN {
-  username String @id @db.VarChar(255)
+  username String  @id @db.VarChar(255)
   password String
   nama     String?
 }
